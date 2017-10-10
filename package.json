@@ -76,7 +76,7 @@
     "clean": "rimraf ./lib",
     "compile": "npm run compile:lib && npm run compile:dist",
     "compile:dist": "rm -rf dist && cross-env ./node_modules/.bin/webpack",
-    "compile:lib": "rm -rf lib && ./node_modules/.bin/babel -d ./lib ./src",
+    "compile:lib": "rm -rf lib && cross-env ./node_modules/.bin/babel -d ./lib ./src",
     "lint": "eslint src test",
     "patch": "bumped release patch",
     "prebuild": "npm run clean",
