@@ -35,6 +35,14 @@ const classMap = {
   xlOffset: 'col-xl-offset'
 };
 
+const hiddenMap = {
+  xs: 'hidden-xs',
+  sm: 'hidden-sm',
+  md: 'hidden-md',
+  lg: 'hidden-lg',
+  xl: 'hidden-xl'
+};
+
 function isInteger(value) {
   return typeof value === 'number' && isFinite(value) && Math.floor(value) === value;
 }
@@ -56,7 +64,16 @@ function getColClassNames(props) {
 
   return Object.keys(props)
     .filter(key => classMap[key])
-    .map(key => getClass(isInteger(props[key]) ? (classMap[key] + '-' + props[key]) : classMap[key]))
+    .map(key => {
+      const colsAmount = props[key];
+
+      if (isInteger(colsAmount) && colsAmount === 0 ) {
+        return getClass(hiddenMap[key]);
+      } else if (isInteger(colsAmount)) {
+        return getClass(classMap[key] + '-' + colsAmount);
+      }
+      return getClass(classMap[key]);
+    })
     .concat(extraClasses);
 }
 

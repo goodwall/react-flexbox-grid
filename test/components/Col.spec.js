@@ -53,4 +53,14 @@ describe('Col', () => {
 
     expect(renderer.getRenderOutput().type).toBe('li');
   });
+
+  it('Should hide elements when cols is 0', () => {
+    renderer.render(<Col xs={0} sm={0} md={0} lg={0} xl={0} />);
+    const { className } = renderer.getRenderOutput().props;
+    expect(className).toContain('hidden-xs');
+    expect(className).toContain('hidden-sm');
+    expect(className).toContain('hidden-md');
+    expect(className).toContain('hidden-lg');
+    expect(className).toContain('hidden-xl');
+  });
 });
